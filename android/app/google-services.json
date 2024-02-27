@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "922374312226",
+    "project_id": "k370healthapp",
+    "storage_bucket": "k370healthapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922374312226:android:2be11f4b0cd41f19f3557b",
+        "android_client_info": {
+          "package_name": "com.k370.projecthealthapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsuqgD2dGOu6MrG_CYxJkU_h5vj9dEXfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
