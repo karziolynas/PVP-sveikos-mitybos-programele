@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:projecthealthapp/common/router.dart';
 import 'package:projecthealthapp/firebase_options.dart';
-import 'package:projecthealthapp/presentation/screens/login_screen.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
