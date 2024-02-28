@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:projecthealthapp/common/router.dart';
 import 'package:projecthealthapp/firebase_options.dart';
+import 'package:projecthealthapp/presentation/screens/login_screen.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,12 +21,13 @@ class MyApp extends ConsumerStatefulWidget {
 class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    throw UnimplementedError();
+    return MaterialApp.router(
+      routerConfig: router,
+    );
   }
 }
