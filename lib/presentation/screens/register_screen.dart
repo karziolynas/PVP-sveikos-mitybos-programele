@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:projecthealthapp/common/RegCheckbox.dart';
+import 'package:projecthealthapp/presentation/screens/login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -15,7 +17,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/logi.png'),
+            image: AssetImage('assets/logi2.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -29,6 +31,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       const SizedBox(
                         height: 130,
+                        child: 
+                        Padding(padding: EdgeInsets.only(left: 200),
+                        child: Image(
+                          image: AssetImage('assets/logo.png'),
+                          height: 58,
+                          width: 78,
+                          )
+                      ),
                       ),
                       const Text(
                         'Create your account',
@@ -47,7 +57,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           "Name",
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            color: Colors.black45,
+                            color: Color.fromRGBO(135, 133, 162,1),
                             fontSize: 16,
                           ),
                         ),
@@ -59,7 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.white.withOpacity(0.7),
+                            fillColor: Colors.white,
                             hintText: "ex: jon smith",
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16,
@@ -81,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           "Email",
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            color: Colors.black45,
+                            color: Color.fromRGBO(135, 133, 162,1),
                             fontSize: 16,
                           ),
                         ),
@@ -93,7 +103,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.white.withOpacity(0.7),
+                            fillColor: Colors.white,
                             hintText: "ex: jon.smith@email.com",
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16,
@@ -115,7 +125,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           "Password",
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            color: Colors.black45,
+                            color: Color.fromRGBO(135, 133, 162,1),
                             fontSize: 16,
                           ),
                         ),
@@ -127,7 +137,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.white.withOpacity(0.7),
+                            fillColor: Colors.white,
                             hintText: "*********",
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16,
@@ -149,7 +159,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           "Confirm password",
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            color: Colors.black45,
+                            color: Color.fromRGBO(135, 133, 162,1),
                             fontSize: 16,
                           ),
                         ),
@@ -161,7 +171,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.white.withOpacity(0.7),
+                            fillColor: Colors.white,
                             hintText: "*********",
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16,
@@ -185,7 +195,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 13,
-                                  color: Color.fromRGBO(135, 133, 162, 100)),
+                                  color: Color.fromRGBO(135, 133, 162, 1)),
                             ),
                           ],
                         ),
@@ -200,34 +210,46 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromRGBO(135, 133, 162, 100),
+                                const Color.fromRGBO(135, 133, 162, 1),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: const Text("SIGN UP"),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 58, top: 10),
-                        child: Row(
-                          children: [
-                            const Text(
-                              "Don't have an account?",
+                          child: const Text("SIGN IN",
                               style: TextStyle(
                                 fontFamily: 'Poppins',
                                 fontSize: 16,
-                                color: Color.fromRGBO(135, 133, 162, 100),
+                                color: Colors.white,
+                              ),),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 100, top: 10),
+                        child: Row(
+                          children: [
+                            const Text(
+                              "Have an account?",
+                              style: TextStyle(
+                                fontFamily: 'Poppins-r',
+                                fontSize: 16,
+                                color: Color.fromRGBO(135, 133, 162, 1),
                               ),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginScreen(),
+                                  ),
+                                );
+                              },
                               child: const Text(
-                                "Sign Up",
+                                "Sign In",
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 16,
-                                  color: Color.fromRGBO(135, 133, 162, 100),
+                                  color: Color.fromRGBO(135, 133, 162, 1),
                                 ),
                               ),
                             ),

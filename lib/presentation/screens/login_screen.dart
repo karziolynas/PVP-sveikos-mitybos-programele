@@ -29,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       const SizedBox(
                         height: 300,
+                        child: Image(image: AssetImage('assets/logo.png'),)
                       ),
                       const Text(
                         'Sign in your account',
@@ -47,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           "Email",
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            color: Colors.black45,
+                            color: Color.fromRGBO(135, 133, 162,1),
                             fontSize: 16,
                           ),
                         ),
@@ -59,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.white.withOpacity(0.7),
+                            fillColor: Colors.white,
                             hintText: "ex: jon.smith@email.com",
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16,
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           "Password",
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            color: Colors.black45,
+                            color: Color.fromRGBO(135, 133, 162,1),
                             fontSize: 16,
                           ),
                         ),
@@ -93,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.white.withOpacity(0.7),
+                            fillColor: Colors.white,
                             hintText: "*********",
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16,
@@ -116,14 +117,19 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromRGBO(135, 133, 162, 100),
+                                const Color.fromRGBO(135, 133, 162, 1),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: const Text("SIGN IN"),
+                          child: const Text("SIGN IN",
+                              style: TextStyle(
+                                fontFamily: 'Poppins-r',
+                                fontSize: 16,
+                                color: Color.fromRGBO(255, 255, 255, 1)
+                              ),
+                          ),),
                         ),
-                      ),
                       Padding(
                         padding: const EdgeInsets.only(left: 58, top: 10),
                         child: Row(
@@ -131,9 +137,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             const Text(
                               "Don't have an account?",
                               style: TextStyle(
-                                fontFamily: 'Poppins',
+                                fontFamily: 'Poppins-r',
                                 fontSize: 16,
-                                color: Color.fromRGBO(135, 133, 162, 100),
+                                color: Color.fromRGBO(135, 133, 162, 1),
                               ),
                             ),
                             TextButton(
@@ -150,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 16,
-                                  color: Color.fromRGBO(135, 133, 162, 100),
+                                  color: Color.fromRGBO(135, 133, 162, 1),
                                 ),
                               ),
                             ),

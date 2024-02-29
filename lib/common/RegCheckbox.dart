@@ -21,11 +21,11 @@ class _RegCheckboxState extends State<RegCheckbox> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Color.fromARGB(77, 231, 77, 208);
+      return Colors.white;
     }
 
     return Checkbox(
-      checkColor: Colors.white,
+      checkColor: Color.fromRGBO(135, 133, 162,1),
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked,
       onChanged: (bool? value) {
