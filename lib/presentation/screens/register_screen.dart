@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:projecthealthapp/presentation/screens/register_screen.dart';
+import 'package:projecthealthapp/common/RegCheckbox.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,10 +28,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     children: [
                       const SizedBox(
-                        height: 300,
+                        height: 130,
                       ),
                       const Text(
-                        'Sign in your account',
+                        'Create your account',
                         style: TextStyle(
                           fontFamily: 'Poppins',
                           color: Colors.white,
@@ -39,7 +39,41 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 50,
+                        height: 25,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(right: 246, bottom: 10),
+                        child: Text(
+                          "Name",
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            color: Colors.black45,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 45,
+                        width: 300,
+                        child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white.withOpacity(0.7),
+                            hintText: "ex: jon smith",
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 14,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
                       ),
                       const Padding(
                         padding: EdgeInsets.only(right: 246, bottom: 10),
@@ -109,6 +143,56 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(
                         height: 20,
                       ),
+                      const Padding(
+                        padding: EdgeInsets.only(right: 145, bottom: 10),
+                        child: Text(
+                          "Confirm password",
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            color: Colors.black45,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 45,
+                        width: 300,
+                        child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white.withOpacity(0.7),
+                            hintText: "*********",
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 14,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 45, bottom: 5),
+                        child: Row(
+                          children: [
+                            RegCheckbox(),
+                            Text(
+                              "I understand the terms & policy.",
+                              style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 13,
+                                  color: Color.fromRGBO(135, 133, 162, 100)),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
                       SizedBox(
                         height: 40,
                         width: 300,
@@ -121,7 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: const Text("SIGN IN"),
+                          child: const Text("SIGN UP"),
                         ),
                       ),
                       Padding(
@@ -137,14 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => RegisterScreen(),
-                                  ),
-                                );
-                              },
+                              onPressed: () {},
                               child: const Text(
                                 "Sign Up",
                                 style: TextStyle(
