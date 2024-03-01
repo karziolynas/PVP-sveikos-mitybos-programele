@@ -215,7 +215,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: const Text("SIGN IN",
+                          child: const Text("SIGN UP",
                               style: TextStyle(
                                 fontFamily: 'Poppins',
                                 fontSize: 16,

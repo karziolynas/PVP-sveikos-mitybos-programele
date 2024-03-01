@@ -124,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           child: const Text("SIGN IN",
                               style: TextStyle(
-                                fontFamily: 'Poppins-r',
+                                fontFamily: 'Poppins',
                                 fontSize: 16,
                                 color: Color.fromRGBO(255, 255, 255, 1)
                               ),
