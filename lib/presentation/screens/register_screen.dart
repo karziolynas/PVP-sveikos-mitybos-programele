@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:projecthealthapp/common/RegCheckbox.dart';
 import 'package:projecthealthapp/presentation/screens/login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,14 +32,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       const SizedBox(
                         height: 130,
-                        child: 
-                        Padding(padding: EdgeInsets.only(left: 200),
-                        child: Image(
-                          image: AssetImage('assets/logo.png'),
-                          height: 58,
-                          width: 78,
-                          )
-                      ),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 200),
+                          child: Image(
+                            image: AssetImage('assets/logo.png'),
+                            height: 58,
+                            width: 78,
+                          ),
+                        ),
                       ),
                       const Text(
                         'Create your account',
@@ -57,7 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           "Name",
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            color: Color.fromRGBO(135, 133, 162,1),
+                            color: Color.fromRGBO(135, 133, 162, 1),
                             fontSize: 16,
                           ),
                         ),
@@ -91,7 +92,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           "Email",
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            color: Color.fromRGBO(135, 133, 162,1),
+                            color: Color.fromRGBO(135, 133, 162, 1),
                             fontSize: 16,
                           ),
                         ),
@@ -125,7 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           "Password",
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            color: Color.fromRGBO(135, 133, 162,1),
+                            color: Color.fromRGBO(135, 133, 162, 1),
                             fontSize: 16,
                           ),
                         ),
@@ -134,6 +135,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 45,
                         width: 300,
                         child: TextFormField(
+                          obscureText: true,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             filled: true,
@@ -159,7 +161,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           "Confirm password",
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            color: Color.fromRGBO(135, 133, 162,1),
+                            color: Color.fromRGBO(135, 133, 162, 1),
                             fontSize: 16,
                           ),
                         ),
@@ -168,6 +170,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 45,
                         width: 300,
                         child: TextFormField(
+                          obscureText: true,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             filled: true,
@@ -185,12 +188,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 45, bottom: 5),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 45, bottom: 5),
                         child: Row(
                           children: [
-                            RegCheckbox(),
-                            Text(
+                            RegCheckbox(
+                              onChanged: (value) {
+                                setState(() {
+                                  isChecked = value;
+                                });
+                              },
+                            ),
+                            const Text(
                               "I understand the terms & policy.",
                               style: TextStyle(
                                   fontFamily: 'Poppins',
@@ -207,7 +216,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 40,
                         width: 300,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: isChecked
+                              ? () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginScreen()));
+                                }       //kol kas tiesiog gražina į login paspaudus
+                              : null,
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromRGBO(135, 133, 162, 1),
@@ -215,12 +232,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: const Text("SIGN UP",
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),),
+                          child: const Text(
+                            "SIGN UP",
+                            style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
                       Padding(
@@ -240,7 +259,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => LoginScreen(),
+                                    builder: (context) => const LoginScreen(),
                                   ),
                                 );
                               },

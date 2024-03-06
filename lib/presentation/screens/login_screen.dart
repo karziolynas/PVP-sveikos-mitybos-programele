@@ -28,9 +28,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     children: [
                       const SizedBox(
-                        height: 300,
-                        child: Image(image: AssetImage('assets/logo.png'),)
-                      ),
+                          height: 300,
+                          child: Image(
+                            image: AssetImage('assets/logo.png'),
+                          )),
                       const Text(
                         'Sign in your account',
                         style: TextStyle(
@@ -48,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           "Email",
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            color: Color.fromRGBO(135, 133, 162,1),
+                            color: Color.fromRGBO(135, 133, 162, 1),
                             fontSize: 16,
                           ),
                         ),
@@ -82,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           "Password",
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            color: Color.fromRGBO(135, 133, 162,1),
+                            color: Color.fromRGBO(135, 133, 162, 1),
                             fontSize: 16,
                           ),
                         ),
@@ -91,6 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 45,
                         width: 300,
                         child: TextFormField(
+                          obscureText: true,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             filled: true,
@@ -122,16 +124,17 @@ class _LoginScreenState extends State<LoginScreen> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: const Text("SIGN IN",
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
+                          child: const Text(
+                            "SIGN IN",
+                            style: TextStyle(
+                                fontFamily: 'Poppins-r',
                                 fontSize: 16,
-                                color: Color.fromRGBO(255, 255, 255, 1)
-                              ),
-                          ),),
+                                color: Color.fromRGBO(255, 255, 255, 1)),
+                          ),
                         ),
+                      ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 80, top: 10),
+                        padding: const EdgeInsets.only(left: 58, top: 10),
                         child: Row(
                           children: [
                             const Text(

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RegCheckbox extends StatefulWidget {
-  const RegCheckbox({super.key});
+  const RegCheckbox({super.key, required this.onChanged});
+  final Function(bool) onChanged;
 
   @override
   State<RegCheckbox> createState() => _RegCheckboxState();
@@ -25,12 +26,13 @@ class _RegCheckboxState extends State<RegCheckbox> {
     }
 
     return Checkbox(
-      checkColor: Color.fromRGBO(135, 133, 162,1),
+      checkColor: Color.fromRGBO(135, 133, 162, 1),
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked,
       onChanged: (bool? value) {
         setState(() {
           isChecked = value!;
+          widget.onChanged(isChecked);
         });
       },
     );
