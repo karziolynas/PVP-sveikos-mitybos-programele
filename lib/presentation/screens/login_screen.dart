@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:projecthealthapp/presentation/screens/register_screen.dart';
 import 'package:projecthealthapp/presentation/screens/personalization_begin.dart';
 
