@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projecthealthapp/common/RegCheckbox.dart';
 import 'package:projecthealthapp/presentation/screens/login_screen.dart';
+import 'package:projecthealthapp/presentation/screens/personalization_begin.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -222,8 +223,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const LoginScreen()));
-                                }       //kol kas tiesiog gražina į login paspaudus
+                                              const personalization_begin()));
+                                }
                               : null,
                           style: ElevatedButton.styleFrom(
                             backgroundColor:

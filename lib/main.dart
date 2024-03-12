@@ -27,10 +27,11 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-    routes: {
-      'LoginPage':(context)=>LoginScreen(),
-    },
-    home: SplashPage(),
+      debugShowCheckedModeBanner: false,
+      routes: {
+        'LoginPage': (context) => LoginScreen(),
+      },
+      home: SplashPage(),
     );
   }
 }
