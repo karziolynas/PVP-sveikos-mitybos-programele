@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:projecthealthapp/presentation/screens/questions_problems.dart';
+import 'package:projecthealthapp/presentation/screens/questions_foodgoals.dart';
 
-class QuestionsScreenTwo extends StatefulWidget {
-  const QuestionsScreenTwo({Key? key}) : super(key: key);
+class QuestionsProblems extends StatefulWidget {
+  const QuestionsProblems({Key? key}) : super(key: key);
 
   @override
-  State<QuestionsScreenTwo> createState() => _QuestionsScreenTwoState();
+  State<QuestionsProblems> createState() => _QuestionsProblemsState();
 }
 
-class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
-  int selectedIndex = -1;
-  bool canClickNext = false;
+class _QuestionsProblemsState extends State<QuestionsProblems> {
+  List selectedIndex = [];
 
   void handleButtonPress(int index) {
-    setState(() {
-      selectedIndex = index;
-      canClickNext = true;
-    });
+    if (selectedIndex.contains(index) == false) {
+      setState(() {
+        selectedIndex.add(index);
+      });
+    } else if (selectedIndex.contains(index)) {
+      setState(() {
+        selectedIndex.remove(index);
+      });
+    }
   }
 
   @override
@@ -37,21 +41,10 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                   alignment: Alignment.center,
                   child: Column(
                     children: [
-                      const SizedBox(
-                        height: 130,
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 200),
-                          child: Image(
-                            image: AssetImage('assets/logo.png'),
-                            height: 58,
-                            width: 78,
-                          ),
-                        ),
-                      ),
                       const Padding(
                         padding: EdgeInsets.only(top: 25),
                         child: Text(
-                          'Food preference',
+                          'Health problems:',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Poppins',
@@ -62,18 +55,18 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                       const SizedBox(
                         height: 50,
                       ),
-                      for (int i = 0; i < 5; i++)
+                      for (int i = 0; i < 10; i++)
                         Padding(
                           padding: const EdgeInsets.only(bottom: 15),
                           child: SizedBox(
                             height: 50,
-                            width: 300,
+                            width: 250,
                             child: ElevatedButton(
                               onPressed: () {
                                 handleButtonPress(i);
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: selectedIndex == i
+                                backgroundColor: selectedIndex.contains(i)
                                     ? const Color.fromRGBO(135, 133, 162, 1)
                                     : Colors.white,
                                 shape: RoundedRectangleBorder(
@@ -82,16 +75,21 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                               ),
                               child: Text(
                                 [
-                                  'Vegetarian',
-                                  'Vegan',
-                                  'Traditional',
-                                  'Healthy / balanced diet',
-                                  'Sports diet'
+                                  'Overweight, obesity',
+                                  'Heart diseases',
+                                  'Type 2 diabetes',
+                                  'Iron deficiency',
+                                  'Iodine deficiency',
+                                  'Vitamin D deficiency',
+                                  'Calcium deficiency',
+                                  'Vitamin A deficiency',
+                                  'Magnesium deficiency',
+                                  'Digestive problems',
                                 ][i],
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 14,
-                                  color: selectedIndex == i
+                                  color: selectedIndex.contains(i)
                                       ? Colors.white
                                       : const Color.fromRGBO(135, 133, 162, 1),
                                 ),
@@ -105,16 +103,13 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                         width: 300,
                         child: ElevatedButton(
                           onPressed: () {
-                            if (canClickNext) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const QuestionsProblems(),
-                                  //TODO
-                                ),
-                              );
-                            }
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => QuestionsFoodGoals(),
+                                //TODO
+                              ),
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
@@ -131,17 +126,6 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                               color: Colors.white,
                             ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      const Text(
-                        'Please select your food preference',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 16,
-                          color: Color.fromRGBO(135, 133, 162, 1),
                         ),
                       ),
                       const SizedBox(

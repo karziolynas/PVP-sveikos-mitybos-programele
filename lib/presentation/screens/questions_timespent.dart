@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:projecthealthapp/presentation/screens/questions_problems.dart';
+import 'package:projecthealthapp/presentation/screens/questions_screen_final.dart';
 
-class QuestionsScreenTwo extends StatefulWidget {
-  const QuestionsScreenTwo({Key? key}) : super(key: key);
+class QuestionsTimeSpent extends StatefulWidget {
+  const QuestionsTimeSpent({Key? key}) : super(key: key);
 
   @override
-  State<QuestionsScreenTwo> createState() => _QuestionsScreenTwoState();
+  State<QuestionsTimeSpent> createState() => _QuestionsTimeSpentState();
 }
 
-class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
+class _QuestionsTimeSpentState extends State<QuestionsTimeSpent> {
   int selectedIndex = -1;
   bool canClickNext = false;
 
@@ -51,7 +51,8 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                       const Padding(
                         padding: EdgeInsets.only(top: 25),
                         child: Text(
-                          'Food preference',
+                          'How much time do you spend while making food ?',
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Poppins',
@@ -62,7 +63,7 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                       const SizedBox(
                         height: 50,
                       ),
-                      for (int i = 0; i < 5; i++)
+                      for (int i = 0; i < 3; i++)
                         Padding(
                           padding: const EdgeInsets.only(bottom: 15),
                           child: SizedBox(
@@ -82,11 +83,9 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                               ),
                               child: Text(
                                 [
-                                  'Vegetarian',
-                                  'Vegan',
-                                  'Traditional',
-                                  'Healthy / balanced diet',
-                                  'Sports diet'
+                                  'Less than 1 hour',
+                                  '1-2 hours',
+                                  '2 or longer',
                                 ][i],
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
@@ -110,7 +109,7 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const QuestionsProblems(),
+                                      const QuestionsScreenFinal(),
                                   //TODO
                                 ),
                               );
@@ -131,17 +130,6 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                               color: Colors.white,
                             ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      const Text(
-                        'Please select your food preference',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 16,
-                          color: Color.fromRGBO(135, 133, 162, 1),
                         ),
                       ),
                       const SizedBox(

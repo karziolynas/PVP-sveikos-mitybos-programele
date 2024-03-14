@@ -1,22 +1,29 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:projecthealthapp/presentation/screens/questions_problems.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:projecthealthapp/presentation/screens/questions_timespent.dart';
 
-class QuestionsScreenTwo extends StatefulWidget {
-  const QuestionsScreenTwo({Key? key}) : super(key: key);
+class QuestionsFoodGoals extends StatefulWidget {
+  const QuestionsFoodGoals({Key? key}) : super(key: key);
 
   @override
-  State<QuestionsScreenTwo> createState() => _QuestionsScreenTwoState();
+  State<QuestionsFoodGoals> createState() => _QuestionsFoodGoalsState();
 }
 
-class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
-  int selectedIndex = -1;
-  bool canClickNext = false;
+class _QuestionsFoodGoalsState extends State<QuestionsFoodGoals> {
+  List selectedIndex = [];
 
   void handleButtonPress(int index) {
-    setState(() {
-      selectedIndex = index;
-      canClickNext = true;
-    });
+    if (selectedIndex.contains(index) == false) {
+      setState(() {
+        selectedIndex.add(index);
+      });
+    } else if (selectedIndex.contains(index)) {
+      setState(() {
+        selectedIndex.remove(index);
+      });
+    }
   }
 
   @override
@@ -51,7 +58,7 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                       const Padding(
                         padding: EdgeInsets.only(top: 25),
                         child: Text(
-                          'Food preference',
+                          'Food goals:',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Poppins',
@@ -62,18 +69,18 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                       const SizedBox(
                         height: 50,
                       ),
-                      for (int i = 0; i < 5; i++)
+                      for (int i = 0; i < 3; i++)
                         Padding(
                           padding: const EdgeInsets.only(bottom: 15),
                           child: SizedBox(
-                            height: 50,
+                            height: 55,
                             width: 300,
                             child: ElevatedButton(
                               onPressed: () {
                                 handleButtonPress(i);
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: selectedIndex == i
+                                backgroundColor: selectedIndex.contains(i)
                                     ? const Color.fromRGBO(135, 133, 162, 1)
                                     : Colors.white,
                                 shape: RoundedRectangleBorder(
@@ -82,16 +89,15 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                               ),
                               child: Text(
                                 [
-                                  'Vegetarian',
-                                  'Vegan',
-                                  'Traditional',
-                                  'Healthy / balanced diet',
-                                  'Sports diet'
+                                  'Weight loss',
+                                  'Disease prevention, immune system strenghtening',
+                                  'Daily healthy food choices',
                                 ][i],
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 14,
-                                  color: selectedIndex == i
+                                  color: selectedIndex.contains(i)
                                       ? Colors.white
                                       : const Color.fromRGBO(135, 133, 162, 1),
                                 ),
@@ -105,16 +111,14 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                         width: 300,
                         child: ElevatedButton(
                           onPressed: () {
-                            if (canClickNext) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const QuestionsProblems(),
-                                  //TODO
-                                ),
-                              );
-                            }
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const QuestionsTimeSpent(),
+                                //TODO
+                              ),
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
@@ -144,17 +148,6 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                           color: Color.fromRGBO(135, 133, 162, 1),
                         ),
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      const Text(
-                        "Click NEXT to proceed",
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 18,
-                          color: Color.fromRGBO(135, 133, 162, 1),
-                        ),
-                      )
                     ],
                   ),
                 ),
