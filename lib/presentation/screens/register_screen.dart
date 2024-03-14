@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projecthealthapp/common/RegCheckbox.dart';
+import 'package:projecthealthapp/common/auth.dart';
+import 'package:projecthealthapp/common/databaseService.dart';
 import 'package:projecthealthapp/presentation/screens/login_screen.dart';
 import 'package:projecthealthapp/presentation/screens/personalization_begin.dart';
 
@@ -12,6 +15,18 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool isChecked = false;
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _nameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 45,
                         width: 300,
                         child: TextFormField(
+                          controller: _nameController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             filled: true,
@@ -102,6 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 45,
                         width: 300,
                         child: TextFormField(
+                          controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             filled: true,
@@ -136,6 +153,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 45,
                         width: 300,
                         child: TextFormField(
+                          controller: _passwordController,
                           obscureText: true,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
@@ -219,11 +237,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: ElevatedButton(
                           onPressed: isChecked
                               ? () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const personalization_begin()));
+                                  signUpWithEmailPassword();
                                 }
                               : null,
                           style: ElevatedButton.styleFrom(
@@ -285,5 +299,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> signUpWithEmailPassword() async {
+    try {
+      await Auth().signUpWithEmailPassword(
+          email: _emailController.text, password: _passwordController.text);
+
+      await DatabaseService().AddInitialUserData(name: _nameController.text);
+    } catch (e) {
+      print(e);
+    }
   }
 }

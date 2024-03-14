@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projecthealthapp/common/databaseService.dart';
 import 'package:projecthealthapp/presentation/screens/questions_screen_final.dart';
 
 class QuestionsTimeSpent extends StatefulWidget {
@@ -12,11 +13,21 @@ class _QuestionsTimeSpentState extends State<QuestionsTimeSpent> {
   int selectedIndex = -1;
   bool canClickNext = false;
 
+  String selectedTimeSpent = '';
+
   void handleButtonPress(int index) {
     setState(() {
       selectedIndex = index;
       canClickNext = true;
     });
+
+    List<String> timeSpent = [
+      'Less than 1 hour',
+      '1-2 hours',
+      '2 or longer',
+    ];
+
+    selectedTimeSpent = timeSpent[index];
   }
 
   @override
@@ -105,6 +116,7 @@ class _QuestionsTimeSpentState extends State<QuestionsTimeSpent> {
                         child: ElevatedButton(
                           onPressed: () {
                             if (canClickNext) {
+                              addTimeSpent();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -152,5 +164,13 @@ class _QuestionsTimeSpentState extends State<QuestionsTimeSpent> {
         ),
       ),
     );
+  }
+
+  Future<void> addTimeSpent() async {
+    try {
+      await DatabaseService().addTimeSpent(timeSpent: selectedTimeSpent);
+    } catch (error) {
+      print(error);
+    }
   }
 }

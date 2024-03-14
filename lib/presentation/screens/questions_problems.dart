@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projecthealthapp/common/databaseService.dart';
 import 'package:projecthealthapp/presentation/screens/questions_foodgoals.dart';
 
 class QuestionsProblems extends StatefulWidget {
@@ -9,18 +10,30 @@ class QuestionsProblems extends StatefulWidget {
 }
 
 class _QuestionsProblemsState extends State<QuestionsProblems> {
-  List selectedIndex = [];
+  List<String> selectedHealthProblems = [];
 
   void handleButtonPress(int index) {
-    if (selectedIndex.contains(index) == false) {
-      setState(() {
-        selectedIndex.add(index);
-      });
-    } else if (selectedIndex.contains(index)) {
-      setState(() {
-        selectedIndex.remove(index);
-      });
-    }
+    setState(() {
+      String problem = [
+        'Overweight, obesity',
+        'Heart diseases',
+        'Type 2 diabetes',
+        'Iron deficiency',
+        'Iodine deficiency',
+        'Vitamin D deficiency',
+        'Calcium deficiency',
+        'Vitamin A deficiency',
+        'Magnesium deficiency',
+        'Digestive problems',
+      ][index];
+
+      // Toggle the selected health problem
+      if (selectedHealthProblems.contains(problem)) {
+        selectedHealthProblems.remove(problem);
+      } else {
+        selectedHealthProblems.add(problem);
+      }
+    });
   }
 
   @override
@@ -66,9 +79,21 @@ class _QuestionsProblemsState extends State<QuestionsProblems> {
                                 handleButtonPress(i);
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: selectedIndex.contains(i)
-                                    ? const Color.fromRGBO(135, 133, 162, 1)
-                                    : Colors.white,
+                                backgroundColor:
+                                    selectedHealthProblems.contains([
+                                  'Overweight, obesity',
+                                  'Heart diseases',
+                                  'Type 2 diabetes',
+                                  'Iron deficiency',
+                                  'Iodine deficiency',
+                                  'Vitamin D deficiency',
+                                  'Calcium deficiency',
+                                  'Vitamin A deficiency',
+                                  'Magnesium deficiency',
+                                  'Digestive problems',
+                                ][i])
+                                        ? const Color.fromRGBO(135, 133, 162, 1)
+                                        : Colors.white,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -89,7 +114,18 @@ class _QuestionsProblemsState extends State<QuestionsProblems> {
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 14,
-                                  color: selectedIndex.contains(i)
+                                  color: selectedHealthProblems.contains([
+                                    'Overweight, obesity',
+                                    'Heart diseases',
+                                    'Type 2 diabetes',
+                                    'Iron deficiency',
+                                    'Iodine deficiency',
+                                    'Vitamin D deficiency',
+                                    'Calcium deficiency',
+                                    'Vitamin A deficiency',
+                                    'Magnesium deficiency',
+                                    'Digestive problems',
+                                  ][i])
                                       ? Colors.white
                                       : const Color.fromRGBO(135, 133, 162, 1),
                                 ),
@@ -103,10 +139,12 @@ class _QuestionsProblemsState extends State<QuestionsProblems> {
                         width: 300,
                         child: ElevatedButton(
                           onPressed: () {
+                            addHealthProblems();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => QuestionsFoodGoals(),
+                                builder: (context) =>
+                                    const QuestionsFoodGoals(),
                                 //TODO
                               ),
                             );
@@ -148,5 +186,14 @@ class _QuestionsProblemsState extends State<QuestionsProblems> {
         ),
       ),
     );
+  }
+
+  Future<void> addHealthProblems() async {
+    try {
+      await DatabaseService()
+          .addHealthProblems(healthProblems: selectedHealthProblems);
+    } catch (error) {
+      print(error);
+    }
   }
 }
