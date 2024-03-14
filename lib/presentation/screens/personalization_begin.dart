@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projecthealthapp/common/auth.dart';
 import 'package:projecthealthapp/presentation/screens/question_screen.dart';
 
 class personalization_begin extends StatefulWidget {
@@ -12,6 +13,14 @@ class _personalization_beginState extends State<personalization_begin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () {
+            Auth().signOut();
+          },
+        ),
+      ),
       body: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -64,7 +73,7 @@ class _personalization_beginState extends State<personalization_begin> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => question_screen(),
+                                  builder: (context) => const QuestionScreen(),
                                 ),
                               );
                             },

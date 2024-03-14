@@ -1,26 +1,11 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Gender Dropdown'),
-        ),
-        body: Center(
-          child: GenderDropdown(),
-        ),
-      ),
-    );
-  }
-}
-
 class GenderDropdown extends StatefulWidget {
+  final Function(String?) onGenderChanged;
+
+  const GenderDropdown({Key? key, required this.onGenderChanged})
+      : super(key: key);
+
   @override
   _GenderDropdownState createState() => _GenderDropdownState();
 }
@@ -43,6 +28,7 @@ class _GenderDropdownState extends State<GenderDropdown> {
         onChanged: (String? newValue) {
           setState(() {
             selectedGender = newValue;
+            widget.onGenderChanged(newValue); // Notify parent widget
           });
         },
         items: <String>['Male', 'Female', 'Other']

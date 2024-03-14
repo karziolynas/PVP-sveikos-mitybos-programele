@@ -36,6 +36,8 @@ dependencies:
   firebase_auth: ^4.16.0
   go_router: ^13.2.0
   flutter_native_splash: ^2.3.10
+  cloud_firestore: ^4.15.9
+  firebase_storage: ^11.6.10
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +55,7 @@ flutter:
     - assets/logi2.png
     - assets/logo.png
     - assets/splash.png
+    - assets/personalization.png
   fonts:
     - family: Poppins
       fonts:

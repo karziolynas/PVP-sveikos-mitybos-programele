@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projecthealthapp/common/databaseService.dart';
 import 'package:projecthealthapp/presentation/screens/questions_problems.dart';
 
 class QuestionsScreenTwo extends StatefulWidget {
@@ -12,10 +13,22 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
   int selectedIndex = -1;
   bool canClickNext = false;
 
+  String selectedPreference = '';
+
   void handleButtonPress(int index) {
     setState(() {
       selectedIndex = index;
       canClickNext = true;
+
+      List<String> preferences = [
+        'Vegetarian',
+        'Vegan',
+        'Traditional',
+        'Healthy / balanced diet',
+        'Sports diet'
+      ];
+
+      selectedPreference = preferences[index];
     });
   }
 
@@ -106,12 +119,12 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
                         child: ElevatedButton(
                           onPressed: () {
                             if (canClickNext) {
+                              addPreference();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
                                       const QuestionsProblems(),
-                                  //TODO
                                 ),
                               );
                             }
@@ -164,5 +177,13 @@ class _QuestionsScreenTwoState extends State<QuestionsScreenTwo> {
         ),
       ),
     );
+  }
+
+  Future<void> addPreference() async {
+    try {
+      await DatabaseService().addPreference(preference: selectedPreference);
+    } catch (error) {
+      print(error);
+    }
   }
 }

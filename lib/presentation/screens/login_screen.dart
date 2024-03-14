@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:projecthealthapp/common/auth.dart';
 import 'package:projecthealthapp/presentation/screens/register_screen.dart';
 import 'package:projecthealthapp/presentation/screens/personalization_begin.dart';
 
@@ -10,6 +12,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 45,
                         width: 300,
                         child: TextFormField(
+                          controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             filled: true,
@@ -93,6 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 45,
                         width: 300,
                         child: TextFormField(
+                          controller: _passwordController,
                           obscureText: true,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
@@ -118,11 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: 300,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => personalization_begin(),
-                                ));
+                            signInWithEmailPassword();
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
@@ -183,5 +193,14 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> signInWithEmailPassword() async {
+    try {
+      await Auth().signInWithEmailPassword(
+          email: _emailController.text, password: _passwordController.text);
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+    }
   }
 }

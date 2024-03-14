@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:projecthealthapp/common/authstatechecker.dart';
 import 'package:projecthealthapp/firebase_options.dart';
 import 'package:projecthealthapp/presentation/screens/login_screen.dart';
 import 'package:projecthealthapp/presentation/screens/splash_screen.dart';
@@ -26,12 +27,9 @@ class _MyAppState extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      routes: {
-        'LoginPage': (context) => LoginScreen(),
-      },
-      home: SplashPage(),
+      home: AuthStateChecker(),
     );
   }
 }

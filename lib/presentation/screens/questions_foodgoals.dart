@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:projecthealthapp/common/databaseService.dart';
 import 'package:projecthealthapp/presentation/screens/questions_timespent.dart';
 
 class QuestionsFoodGoals extends StatefulWidget {
@@ -12,18 +13,22 @@ class QuestionsFoodGoals extends StatefulWidget {
 }
 
 class _QuestionsFoodGoalsState extends State<QuestionsFoodGoals> {
-  List selectedIndex = [];
+  List<String> selectedGoals = [];
 
   void handleButtonPress(int index) {
-    if (selectedIndex.contains(index) == false) {
-      setState(() {
-        selectedIndex.add(index);
-      });
-    } else if (selectedIndex.contains(index)) {
-      setState(() {
-        selectedIndex.remove(index);
-      });
-    }
+    setState(() {
+      String goal = [
+        'Weight loss',
+        'Disease prevention, immune system strenghtening',
+        'Daily healthy food choices',
+      ][index];
+
+      if (selectedGoals.contains(goal)) {
+        selectedGoals.remove(goal);
+      } else {
+        selectedGoals.add(goal);
+      }
+    });
   }
 
   @override
@@ -80,7 +85,11 @@ class _QuestionsFoodGoalsState extends State<QuestionsFoodGoals> {
                                 handleButtonPress(i);
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: selectedIndex.contains(i)
+                                backgroundColor: selectedGoals.contains([
+                                  'Weight loss',
+                                  'Disease prevention, immune system strenghtening',
+                                  'Daily healthy food choices',
+                                ][i])
                                     ? const Color.fromRGBO(135, 133, 162, 1)
                                     : Colors.white,
                                 shape: RoundedRectangleBorder(
@@ -97,7 +106,11 @@ class _QuestionsFoodGoalsState extends State<QuestionsFoodGoals> {
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 14,
-                                  color: selectedIndex.contains(i)
+                                  color: selectedGoals.contains([
+                                    'Weight loss',
+                                    'Disease prevention, immune system strenghtening',
+                                    'Daily healthy food choices',
+                                  ][i])
                                       ? Colors.white
                                       : const Color.fromRGBO(135, 133, 162, 1),
                                 ),
@@ -111,12 +124,12 @@ class _QuestionsFoodGoalsState extends State<QuestionsFoodGoals> {
                         width: 300,
                         child: ElevatedButton(
                           onPressed: () {
+                            addGoals();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
                                     const QuestionsTimeSpent(),
-                                //TODO
                               ),
                             );
                           },
@@ -157,5 +170,13 @@ class _QuestionsFoodGoalsState extends State<QuestionsFoodGoals> {
         ),
       ),
     );
+  }
+
+  Future<void> addGoals() async {
+    try {
+      await DatabaseService().addGoals(goals: selectedGoals);
+    } catch (error) {
+      print(error);
+    }
   }
 }
