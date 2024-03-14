@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:projecthealthapp/presentation/screens/question_screen.dart';
 
-class personalization_begin extends StatefulWidget {
-  const personalization_begin({super.key});
+class QuestionsScreenFinal extends StatefulWidget {
+  const QuestionsScreenFinal({super.key});
 
   @override
-  State<personalization_begin> createState() => _personalization_beginState();
+  State<QuestionsScreenFinal> createState() => _QuestionsScreenFinalState();
 }
 
-class _personalization_beginState extends State<personalization_begin> {
+class _QuestionsScreenFinalState extends State<QuestionsScreenFinal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,28 +32,21 @@ class _personalization_beginState extends State<personalization_begin> {
                             child: Image(
                               image: AssetImage('assets/logo.png'),
                             )),
-                        const Text(
-                          'Thank you for joining',
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              color: Color.fromRGBO(135, 133, 162, 1),
-                              fontSize: 30),
-                        ),
                         const SizedBox(
                           height: 50,
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(right: 10, left: 10),
+                          padding: EdgeInsets.only(right: 40, left: 40),
                           child: Text(
-                              'Before we proceed, we would like to gather some essential health information from you through a few quick questions to ensure a personalized and effective experience with our app',
+                              'Your responses have been successfully saved, ensuring a tailored experience on your health journey with us.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontFamily: 'Poppins',
                                   color: Color.fromRGBO(135, 133, 162, 1),
-                                  fontSize: 18)),
+                                  fontSize: 20)),
                         ),
                         const SizedBox(
-                          height: 150,
+                          height: 200,
                         ),
                         SizedBox(
                           height: 50,
@@ -64,7 +56,7 @@ class _personalization_beginState extends State<personalization_begin> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => question_screen(),
+                                  builder: (context) => QuestionsScreenFinal(),
                                 ),
                               );
                             },
@@ -85,17 +77,7 @@ class _personalization_beginState extends State<personalization_begin> {
                           ),
                         ),
                         const SizedBox(
-                          height: 15,
-                        ),
-                        const Text(
-                          'Your journey to a healthier you begins now',
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 16,
-                              color: Color.fromRGBO(135, 133, 162, 1)),
-                        ),
-                        const SizedBox(
-                          height: 15,
+                          height: 25,
                         ),
                         const Text(
                           "Click NEXT to proceed",
