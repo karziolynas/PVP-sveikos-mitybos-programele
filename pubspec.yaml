@@ -56,6 +56,15 @@ flutter:
     - assets/logo.png
     - assets/splash.png
     - assets/personalization.png
+    - assets/main_screen.png
+    - assets/minus.png
+    - assets/plus.png
+    - assets/sakutes.png
+    - assets/settings_icon.png
+    - assets/cup.png
+    - assets/diary.png
+    - assets/home.png
+    - assets/food.png
   fonts:
     - family: Poppins
       fonts:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projecthealthapp/presentation/screens/main_page.dart';
 
 class QuestionsScreenFinal extends StatefulWidget {
   const QuestionsScreenFinal({super.key});
@@ -56,7 +57,7 @@ class _QuestionsScreenFinalState extends State<QuestionsScreenFinal> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => QuestionsScreenFinal(),
+                                  builder: (context) => MainScreen(),
                                 ),
                               );
                             },
