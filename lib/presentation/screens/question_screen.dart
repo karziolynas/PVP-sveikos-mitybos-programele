@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projecthealthapp/common/databaseService.dart';
 import 'package:projecthealthapp/common/genderDropDownMenu.dart';
 import 'package:projecthealthapp/presentation/screens/questions_screen_two.dart';
+import 'package:intl/intl.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   final TextEditingController _birthDateController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
+  final TextEditingController _date = TextEditingController();
 
   @override
   void dispose() {
@@ -79,8 +81,20 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         height: 45,
                         width: 300,
                         child: TextFormField(
-                          controller: _birthDateController,
+                          controller: _date,
                           keyboardType: TextInputType.datetime,
+                          onTap: () async {
+                            DateTime? pickeddate = await showDatePicker(
+                                context: context,
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime.now());
+                            if (pickeddate != null) {
+                              setState(() {
+                                _date.text =
+                                    DateFormat('yyyy-MM-dd').format(pickeddate);
+                              });
+                            }
+                          },
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
