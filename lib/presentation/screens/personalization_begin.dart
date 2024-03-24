@@ -55,7 +55,7 @@ class _personalization_beginState extends State<personalization_begin> {
                         const Padding(
                           padding: EdgeInsets.only(right: 10, left: 10),
                           child: Text(
-                              'Before we proceed, we would like to gather some essential health information from you through a few quick questions to ensure a personalized and effective experience with our app',
+                              'Before we proceed, we would like to gather some essential health facts to ensure a personalized and effective experience with our app',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontFamily: 'Poppins',

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:projecthealthapp/common/auth.dart';
+
+import 'package:pedometer/pedometer.dart';
+import 'dart:async';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -9,6 +14,41 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _count = 0;
+
+  late Stream<StepCount> _stepCountStream;
+  int _steps = -1;
+  double _percnt = 0.0;
+  final stepsController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+  }
+
+  void onStepCount(StepCount event) {
+    print(event);
+    setState(() {
+      _steps = event.steps;
+      _percnt = (_steps * 1.0) / 8000.0;
+      stepsController.text = _steps.toString();
+    });
+  }
+
+  void onStepCountError(error) {
+    print('onStepCountError: $error');
+    setState(() {
+      _steps = -2;
+      stepsController.text = "ERR";
+    });
+  }
+
+  void initPlatformState() {
+    _stepCountStream = Pedometer.stepCountStream;
+    _stepCountStream.listen(onStepCount).onError(onStepCountError);
+
+    if (!mounted) return;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +94,12 @@ class _MainScreenState extends State<MainScreen> {
                                   fontFamily: 'Poppins-n',
                                   fontSize: 20,
                                 ),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.logout),
+                                onPressed: () {
+                                  Auth().signOut();
+                                },
                               ),
                               const Spacer(),
                               IconButton(
@@ -247,8 +293,8 @@ class _MainScreenState extends State<MainScreen> {
                                     style: TextStyle(
                                       color: Color.fromRGBO(59, 59, 59, 1),
                                       fontWeight: FontWeight.w100,
-                                      fontFamily: 'Poppins',
-                                      fontSize: 14,
+                                      fontFamily: 'Poppins-n',
+                                      fontSize: 16,
                                     ),
                                   ),
                                 ],
@@ -276,13 +322,30 @@ class _MainScreenState extends State<MainScreen> {
                                     const SizedBox(
                                       height: 15,
                                     ),
-                                    Image.asset(
-                                      'assets/cup.png',
-                                      height: 57,
-                                      width: 51,
-                                    ),
+                                    Center(
+                                        child: CircularPercentIndicator(
+                                      radius: 50.0,
+                                      lineWidth: 15.0,
+                                      animation: true,
+                                      percent: _percnt,
+                                      center: Text(
+                                        stepsController.text,
+                                        style: const TextStyle(
+                                          color: Color.fromRGBO(59, 59, 59, 1),
+                                          fontWeight: FontWeight.w100,
+                                          fontFamily: 'Poppins',
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      circularStrokeCap:
+                                          CircularStrokeCap.round,
+                                      backgroundColor: const Color.fromRGBO(
+                                          230, 230, 230, 1),
+                                      progressColor: const Color.fromRGBO(
+                                          255, 199, 199, 1),
+                                    )),
                                     const SizedBox(
-                                      height: 15,
+                                      height: 5,
                                     ),
                                     const Text(
                                       "Steps Walked",
