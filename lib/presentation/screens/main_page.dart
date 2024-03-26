@@ -4,6 +4,7 @@ import 'package:projecthealthapp/common/auth.dart';
 import 'package:pedometer/pedometer.dart';
 import 'dart:async';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:projecthealthapp/presentation/screens/food_page.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -197,7 +198,7 @@ class _MainScreenState extends State<MainScreen> {
                               ),
                             ),
                             Text(
-                              "Check out the daily recipies",
+                              "Check out the daily recipes",
                               style: TextStyle(
                                 color: Color.fromRGBO(153, 153, 153, 1),
                                 fontWeight: FontWeight.w100,
@@ -420,55 +421,61 @@ class _MainScreenState extends State<MainScreen> {
                       height: 85,
                     ),
                     Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(children: [
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(children: [
+                          IconButton(
+                            color: const Color.fromRGBO(135, 133, 162, 1),
+                            icon: const ImageIcon(
+                              AssetImage('assets/diary.png'),
+                            ),
+                            iconSize: 28,
+                            onPressed: () => print('diary pressed'),
+                          ),
+                          const Text(
+                            "Diary",
+                            style: TextStyle(
+                              color: Color.fromRGBO(135, 133, 162, 1),
+                              fontWeight: FontWeight.w100,
+                              fontFamily: 'Poppins',
+                              fontSize: 15,
+                            ),
+                          ),
+                        ]),
+                        Column(children: [
+                          IconButton(
+                            color: const Color.fromRGBO(255, 199, 199, 1),
+                            icon: const ImageIcon(
+                              AssetImage('assets/home.png'),
+                            ),
+                            iconSize: 28,
+                            onPressed: () => print('home pressed'),
+                          ),
+                          const Text(
+                            "Home",
+                            style: TextStyle(
+                              color: Color.fromRGBO(255, 199, 199, 1),
+                              fontWeight: FontWeight.w100,
+                              fontFamily: 'Poppins',
+                              fontSize: 15,
+                            ),
+                          ),
+                        ]),
+                        Column(
+                          children: [
                             IconButton(
-                              color: const Color.fromRGBO(135, 133, 162, 1),
-                              icon: const ImageIcon(
-                                AssetImage('assets/diary.png'),
-                              ),
-                              iconSize: 28,
-                              onPressed: () => print('diary pressed'),
-                            ),
-                            const Text(
-                              "Diary",
-                              style: TextStyle(
-                                color: Color.fromRGBO(135, 133, 162, 1),
-                                fontWeight: FontWeight.w100,
-                                fontFamily: 'Poppins',
-                                fontSize: 15,
-                              ),
-                            ),
-                          ]),
-                          Column(children: [
-                            IconButton(
-                              color: const Color.fromRGBO(255, 199, 199, 1),
-                              icon: const ImageIcon(
-                                AssetImage('assets/home.png'),
-                              ),
-                              iconSize: 28,
-                              onPressed: () => print('home pressed'),
-                            ),
-                            const Text(
-                              "Home",
-                              style: TextStyle(
-                                color: Color.fromRGBO(255, 199, 199, 1),
-                                fontWeight: FontWeight.w100,
-                                fontFamily: 'Poppins',
-                                fontSize: 15,
-                              ),
-                            ),
-                          ]),
-                          Column(children: [
-                            IconButton(
-                              color: const Color.fromRGBO(135, 133, 162, 1),
-                              icon: const ImageIcon(
-                                AssetImage('assets/food.png'),
-                              ),
-                              iconSize: 28,
-                              onPressed: () => print('food pressed'),
-                            ),
+                                color: const Color.fromRGBO(135, 133, 162, 1),
+                                icon: const ImageIcon(
+                                  AssetImage('assets/food.png'),
+                                ),
+                                iconSize: 28,
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const FoodPage(),
+                                      ));
+                                }),
                             const Text(
                               "Food",
                               style: TextStyle(
@@ -478,8 +485,10 @@ class _MainScreenState extends State<MainScreen> {
                                 fontSize: 15,
                               ),
                             ),
-                          ]),
-                        ]),
+                          ],
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
