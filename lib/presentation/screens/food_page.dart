@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projecthealthapp/presentation/screens/diary_page.dart';
 import 'package:projecthealthapp/presentation/screens/main_page.dart';
+import 'package:projecthealthapp/presentation/screens/settings_screen.dart';
 
 class FoodPage extends StatefulWidget {
   const FoodPage({Key? key}) : super(key: key);
@@ -61,7 +62,13 @@ class _FoodPageState extends State<FoodPage> {
                                 icon: const ImageIcon(
                                   AssetImage('assets/settings_icon.png'),
                                 ),
-                                onPressed: () => print('Settings pressed'),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SettingsScreen()));
+                                },
                               ),
                             ],
                           ),
@@ -404,7 +411,10 @@ class _FoodPageState extends State<FoodPage> {
                                       ),
                                       foregroundColor:
                                           MaterialStateProperty.all<Color>(
-                                        const Color.fromRGBO(135, 133, 162, 1),
+                                        selectedIngredients.contains('Nuts')
+                                            ? Colors.white
+                                            : const Color.fromRGBO(
+                                                135, 133, 162, 1),
                                       ),
                                       shape: MaterialStateProperty.all<
                                           RoundedRectangleBorder>(
@@ -414,7 +424,13 @@ class _FoodPageState extends State<FoodPage> {
                                         ),
                                       ),
                                     ),
-                                    child: const Text('Nuts'),
+                                    child: const Text(
+                                      'Nuts',
+                                      style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 15,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -444,7 +460,10 @@ class _FoodPageState extends State<FoodPage> {
                                       ),
                                       foregroundColor:
                                           MaterialStateProperty.all<Color>(
-                                        const Color.fromRGBO(135, 133, 162, 1),
+                                        selectedIngredients.contains('Milk')
+                                            ? Colors.white
+                                            : const Color.fromRGBO(
+                                                135, 133, 162, 1),
                                       ),
                                       shape: MaterialStateProperty.all<
                                           RoundedRectangleBorder>(
@@ -454,7 +473,13 @@ class _FoodPageState extends State<FoodPage> {
                                         ),
                                       ),
                                     ),
-                                    child: const Text('Milk'),
+                                    child: const Text(
+                                      'Milk',
+                                      style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 15,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -484,7 +509,10 @@ class _FoodPageState extends State<FoodPage> {
                                       ),
                                       foregroundColor:
                                           MaterialStateProperty.all<Color>(
-                                        const Color.fromRGBO(135, 133, 162, 1),
+                                        selectedIngredients.contains('Chicken')
+                                            ? Colors.white
+                                            : const Color.fromRGBO(
+                                                135, 133, 162, 1),
                                       ),
                                       shape: MaterialStateProperty.all<
                                           RoundedRectangleBorder>(
@@ -494,7 +522,13 @@ class _FoodPageState extends State<FoodPage> {
                                         ),
                                       ),
                                     ),
-                                    child: const Text('Chicken'),
+                                    child: const Text(
+                                      'Chicken',
+                                      style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 15,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),

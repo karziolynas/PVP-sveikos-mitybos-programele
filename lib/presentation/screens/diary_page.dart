@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projecthealthapp/presentation/screens/food_page.dart';
 import 'package:projecthealthapp/presentation/screens/main_page.dart';
+import 'package:projecthealthapp/presentation/screens/settings_screen.dart';
 
 class DiaryPage extends StatefulWidget {
   const DiaryPage({super.key});
@@ -60,7 +61,13 @@ class _DiaryPageState extends State<DiaryPage> {
                                 icon: const ImageIcon(
                                   AssetImage('assets/settings_icon.png'),
                                 ),
-                                onPressed: () => print('Settings pressed'),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SettingsScreen()));
+                                },
                               ),
                             ],
                           ),

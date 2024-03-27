@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:projecthealthapp/presentation/screens/diary_page.dart';
 import 'package:projecthealthapp/presentation/screens/food_page.dart';
+import 'package:projecthealthapp/presentation/screens/settings_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -108,7 +109,13 @@ class _MainScreenState extends State<MainScreen> {
                                 icon: const ImageIcon(
                                   AssetImage('assets/settings_icon.png'),
                                 ),
-                                onPressed: () => print('Settings pressed'),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SettingsScreen()));
+                                },
                               ),
                             ],
                           ),
