@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projecthealthapp/presentation/screens/diary_page.dart';
 import 'package:projecthealthapp/presentation/screens/main_page.dart';
 
 class FoodPage extends StatefulWidget {
@@ -68,7 +69,7 @@ class _FoodPageState extends State<FoodPage> {
                       ),
                       Container(
                         alignment: Alignment.center,
-                        height: 850,
+                        height: 757,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
@@ -500,81 +501,6 @@ class _FoodPageState extends State<FoodPage> {
                               const SizedBox(
                                 height: 45,
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Column(children: [
-                                    IconButton(
-                                      color: const Color.fromRGBO(
-                                          135, 133, 162, 1),
-                                      icon: const ImageIcon(
-                                        AssetImage('assets/diary.png'),
-                                      ),
-                                      iconSize: 28,
-                                      onPressed: () => print('diary pressed'),
-                                    ),
-                                    const Text(
-                                      "Diary",
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(135, 133, 162, 1),
-                                        fontWeight: FontWeight.w100,
-                                        fontFamily: 'Poppins',
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ]),
-                                  Column(
-                                    children: [
-                                      IconButton(
-                                          color: const Color.fromRGBO(
-                                              135, 133, 162, 1),
-                                          icon: const ImageIcon(
-                                            AssetImage('assets/home.png'),
-                                          ),
-                                          iconSize: 28,
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const MainScreen(),
-                                                ));
-                                          }),
-                                      const Text(
-                                        "Home",
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(135, 133, 162, 1),
-                                          fontWeight: FontWeight.w100,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(children: [
-                                    IconButton(
-                                      color: const Color.fromRGBO(
-                                          255, 199, 199, 1),
-                                      icon: const ImageIcon(
-                                        AssetImage('assets/food.png'),
-                                      ),
-                                      iconSize: 28,
-                                      onPressed: () => print('home pressed'),
-                                    ),
-                                    const Text(
-                                      "Food",
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(255, 199, 199, 1),
-                                        fontWeight: FontWeight.w100,
-                                        fontFamily: 'Poppins',
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ]),
-                                ],
-                              ),
                             ],
                           ),
                         ),
@@ -583,7 +509,84 @@ class _FoodPageState extends State<FoodPage> {
                   ),
                 ),
               ),
-            )
+            ),
+            Container(
+              decoration: const BoxDecoration(color: Colors.white),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(children: [
+                    IconButton(
+                      color: const Color.fromRGBO(135, 133, 162, 1),
+                      icon: const ImageIcon(
+                        AssetImage('assets/diary.png'),
+                      ),
+                      iconSize: 28,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const DiaryPage()));
+                      },
+                    ),
+                    const Text(
+                      "Diary",
+                      style: TextStyle(
+                        color: Color.fromRGBO(135, 133, 162, 1),
+                        fontWeight: FontWeight.w100,
+                        fontFamily: 'Poppins',
+                        fontSize: 15,
+                      ),
+                    ),
+                  ]),
+                  Column(
+                    children: [
+                      IconButton(
+                          color: const Color.fromRGBO(135, 133, 162, 1),
+                          icon: const ImageIcon(
+                            AssetImage('assets/home.png'),
+                          ),
+                          iconSize: 28,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MainScreen(),
+                                ));
+                          }),
+                      const Text(
+                        "Home",
+                        style: TextStyle(
+                          color: Color.fromRGBO(135, 133, 162, 1),
+                          fontWeight: FontWeight.w100,
+                          fontFamily: 'Poppins',
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(children: [
+                    IconButton(
+                      color: const Color.fromRGBO(255, 199, 199, 1),
+                      icon: const ImageIcon(
+                        AssetImage('assets/food.png'),
+                      ),
+                      iconSize: 28,
+                      onPressed: () => print('home pressed'),
+                    ),
+                    const Text(
+                      "Food",
+                      style: TextStyle(
+                        color: Color.fromRGBO(255, 199, 199, 1),
+                        fontWeight: FontWeight.w100,
+                        fontFamily: 'Poppins',
+                        fontSize: 15,
+                      ),
+                    ),
+                  ]),
+                ],
+              ),
+            ),
           ],
         ),
       ),

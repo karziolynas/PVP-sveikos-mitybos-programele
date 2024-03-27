@@ -4,6 +4,7 @@ import 'package:projecthealthapp/common/auth.dart';
 import 'package:pedometer/pedometer.dart';
 import 'dart:async';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:projecthealthapp/presentation/screens/diary_page.dart';
 import 'package:projecthealthapp/presentation/screens/food_page.dart';
 
 class MainScreen extends StatefulWidget {
@@ -430,7 +431,12 @@ class _MainScreenState extends State<MainScreen> {
                               AssetImage('assets/diary.png'),
                             ),
                             iconSize: 28,
-                            onPressed: () => print('diary pressed'),
+                            onPressed: () => {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const DiaryPage()))
+                            },
                           ),
                           const Text(
                             "Diary",
