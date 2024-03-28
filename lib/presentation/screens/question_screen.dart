@@ -26,6 +26,25 @@ class _QuestionScreenState extends State<QuestionScreen> {
     super.dispose();
   }
 
+  bool _validateFields() {
+    if (_date.text.isEmpty ||
+        selectedGender == null ||
+        _heightController.text.isEmpty ||
+        _weightController.text.isEmpty) {
+      return false;
+    }
+    if (double.tryParse(_heightController.text) == null ||
+        double.tryParse(_weightController.text) == null) {
+      return false;
+    }
+    final height = double.parse(_heightController.text);
+    final weight = double.parse(_weightController.text);
+    if (height <= 0 || height > 300 || weight <= 0 || weight > 300) {
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,29 +133,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       const Padding(
                         padding: EdgeInsets.only(right: 150, bottom: 10),
                         child: Text(
-                          'Select your gender:    ',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            color: Color.fromRGBO(135, 133, 162, 1),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 45,
-                        width: 300,
-                        child: GenderDropdown(
-                          onGenderChanged: (gender) {
-                            setState(() {
-                              selectedGender = gender;
-                            });
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-                      const Padding(
-                        padding: EdgeInsets.only(right: 150, bottom: 10),
-                        child: Text(
                           'Enter your height:     ',
                           style: TextStyle(
                             fontFamily: 'Poppins',
@@ -149,7 +145,13 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         width: 300,
                         child: TextFormField(
                           controller: _heightController,
-                          keyboardType: TextInputType.datetime,
+                          keyboardType: TextInputType.number,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your height';
+                            }
+                            return null;
+                          },
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
@@ -181,7 +183,13 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         width: 300,
                         child: TextFormField(
                           controller: _weightController,
-                          keyboardType: TextInputType.datetime,
+                          keyboardType: TextInputType.number,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your weight';
+                            }
+                            return null;
+                          },
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
@@ -197,21 +205,46 @@ class _QuestionScreenState extends State<QuestionScreen> {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 15),
+                      const Padding(
+                        padding: EdgeInsets.only(right: 150, bottom: 10),
+                        child: Text(
+                          'Select your gender:    ',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            color: Color.fromRGBO(135, 133, 162, 1),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 45,
+                        width: 300,
+                        child: GenderDropdown(
+                          onGenderChanged: (gender) {
+                            setState(() {
+                              selectedGender = gender;
+                            });
+                          },
+                        ),
+                      ),
                       const SizedBox(height: 100),
                       SizedBox(
                         height: 50,
                         width: 300,
                         child: ElevatedButton(
-                          onPressed: () {
-                            addGeneralQuestionsToUserData();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const QuestionsScreenTwo(),
-                              ),
-                            );
-                          },
+                          onPressed: _validateFields()
+                              ? () {
+                                  addGeneralQuestionsToUserData();
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const QuestionsScreenTwo(),
+                                    ),
+                                  );
+                                }
+                              : null,
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromRGBO(135, 133, 162, 1),
@@ -261,7 +294,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   Future<void> addGeneralQuestionsToUserData() async {
     try {
       await DatabaseService().addGeneralQuestions(
-          birthDate: _birthDateController.text,
+          birthDate: _date.text,
           gender: selectedGender!,
           height: _heightController.text,
           weight: _weightController.text);

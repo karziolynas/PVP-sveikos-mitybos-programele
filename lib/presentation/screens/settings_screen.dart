@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:projecthealthapp/common/auth.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -264,7 +265,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         width: 300,
                         child: ElevatedButton(
                             onPressed: () {
-                              print('a');
+                              Auth().signOut();
                             },
                             style: ButtonStyle(
                               alignment: Alignment.centerLeft,
