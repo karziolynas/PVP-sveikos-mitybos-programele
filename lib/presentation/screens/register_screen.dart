@@ -242,6 +242,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           onPressed: isChecked
                               ? () {
                                   signUpWithEmailPassword();
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const personalization_begin()));
                                 }
                               : null,
                           style: ElevatedButton.styleFrom(

@@ -13,14 +13,6 @@ class _personalization_beginState extends State<personalization_begin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.logout),
-          onPressed: () {
-            Auth().signOut();
-          },
-        ),
-      ),
       body: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(

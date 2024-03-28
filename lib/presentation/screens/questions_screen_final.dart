@@ -57,7 +57,7 @@ class _QuestionsScreenFinalState extends State<QuestionsScreenFinal> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MainScreen(),
+                                  builder: (context) => const MainScreen(),
                                 ),
                               );
                             },

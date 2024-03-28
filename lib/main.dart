@@ -1,15 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:projecthealthapp/common/authstatechecker.dart';
+import 'package:projecthealthapp/common/auth.dart';
 import 'package:projecthealthapp/firebase_options.dart';
 import 'package:projecthealthapp/presentation/screens/login_screen.dart';
+import 'package:projecthealthapp/presentation/screens/main_page.dart';
 import 'package:projecthealthapp/presentation/screens/splash_screen.dart';
 
-Future main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(const MyApp());
 }
 
 class MyApp extends ConsumerStatefulWidget {
@@ -27,9 +29,13 @@ class _MyAppState extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: AuthStateChecker(),
-    );
+    return StreamBuilder(
+        stream: Auth().authStateChanges,
+        builder: (context, snapshot) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: snapshot.hasData ? const MainScreen() : const LoginScreen(),
+          );
+        });
   }
 }

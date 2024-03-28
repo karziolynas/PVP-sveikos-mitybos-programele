@@ -52,19 +52,14 @@ class _MainScreenState extends State<MainScreen> {
               weight = jsonDecode(userData!['weight']),
               height = jsonDecode(userData!['height']) / 100,
               bmi = (weight / (height * height)),
-
-              if(bmi <= 18.5){
-                bmiController.text = "Your BMI is too low!"
-              }
-              else if (bmi > 18.5 && bmi < 24.9){
-                bmiController.text = "Your BMI is normal"
-              }
-              else if (bmi > 25 && bmi < 29.9){
-                bmiController.text = "Your BMI is slightly too high!"
-              }
-              else{
-                bmiController.text = "Your BMI is too high!"
-              }
+              if (bmi <= 18.5)
+                {bmiController.text = "Your BMI is too low!"}
+              else if (bmi > 18.5 && bmi < 24.9)
+                {bmiController.text = "Your BMI is normal"}
+              else if (bmi > 25 && bmi < 29.9)
+                {bmiController.text = "Your BMI is slightly too high!"}
+              else
+                {bmiController.text = "Your BMI is too high!"}
             });
   }
 
@@ -129,7 +124,7 @@ class _MainScreenState extends State<MainScreen> {
                                 width: 5,
                               ),
                               Text(
-                                'Hello, ' + userName,
+                                'Hello, $userName',
                                 style: const TextStyle(
                                   color: Color.fromRGBO(30, 30, 30, 1),
                                   fontWeight: FontWeight.w100,
@@ -435,7 +430,7 @@ class _MainScreenState extends State<MainScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              weight.toString() + " kg",
+                              "$weight kg",
                               style: const TextStyle(
                                 color: Color.fromRGBO(59, 59, 59, 1),
                                 fontWeight: FontWeight.w100,
@@ -446,7 +441,7 @@ class _MainScreenState extends State<MainScreen> {
                             Text(
                               bmiController.text,
                               style: const TextStyle(
-                                color: const Color.fromRGBO(153, 153, 153, 1),
+                                color: Color.fromRGBO(153, 153, 153, 1),
                                 fontWeight: FontWeight.w100,
                                 fontFamily: 'Poppins',
                                 fontSize: 12,
