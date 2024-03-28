@@ -1,9 +1,13 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:projecthealthapp/common/auth.dart';
 
 import 'package:pedometer/pedometer.dart';
 import 'dart:async';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:projecthealthapp/common/databaseService.dart';
 import 'package:projecthealthapp/presentation/screens/diary_page.dart';
 import 'package:projecthealthapp/presentation/screens/food_page.dart';
 import 'package:projecthealthapp/presentation/screens/settings_screen.dart';
@@ -22,11 +26,46 @@ class _MainScreenState extends State<MainScreen> {
   int _steps = -1;
   double _percnt = 0.0;
   final stepsController = TextEditingController();
+  final bmiController = TextEditingController();
 
   @override
   void initState() {
-    super.initState();
     initPlatformState();
+    getUserData();
+    super.initState();
+  }
+
+  String userName = "";
+  int weight = 0;
+  double height = 0;
+  double bmi = 0;
+  Map<String, dynamic>? userData;
+
+  void getUserData() async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .where("userId", isEqualTo: DatabaseService().userId)
+        .get()
+        .then((QuerySnapshot snap) => {
+              userData = snap.docs.first.data()! as Map<String, dynamic>,
+              userName = userData!['name'],
+              weight = jsonDecode(userData!['weight']),
+              height = jsonDecode(userData!['height']) / 100,
+              bmi = (weight / (height * height)),
+
+              if(bmi <= 18.5){
+                bmiController.text = "Your BMI is too low!"
+              }
+              else if (bmi > 18.5 && bmi < 24.9){
+                bmiController.text = "Your BMI is normal"
+              }
+              else if (bmi > 25 && bmi < 29.9){
+                bmiController.text = "Your BMI is slightly too high!"
+              }
+              else{
+                bmiController.text = "Your BMI is too high!"
+              }
+            });
   }
 
   void onStepCount(StepCount event) {
@@ -89,22 +128,22 @@ class _MainScreenState extends State<MainScreen> {
                               const SizedBox(
                                 width: 5,
                               ),
-                              const Text(
-                                'Hello, Name',
-                                style: TextStyle(
+                              Text(
+                                'Hello, ' + userName,
+                                style: const TextStyle(
                                   color: Color.fromRGBO(30, 30, 30, 1),
                                   fontWeight: FontWeight.w100,
                                   fontFamily: 'Poppins-n',
                                   fontSize: 20,
                                 ),
                               ),
+                              const Spacer(),
                               IconButton(
                                 icon: const Icon(Icons.logout),
                                 onPressed: () {
                                   Auth().signOut();
                                 },
                               ),
-                              const Spacer(),
                               IconButton(
                                 icon: const ImageIcon(
                                   AssetImage('assets/settings_icon.png'),
@@ -392,12 +431,12 @@ class _MainScreenState extends State<MainScreen> {
                         const SizedBox(
                           width: 20,
                         ),
-                        const Column(
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "70 kg",
-                              style: TextStyle(
+                              weight.toString() + " kg",
+                              style: const TextStyle(
                                 color: Color.fromRGBO(59, 59, 59, 1),
                                 fontWeight: FontWeight.w100,
                                 fontFamily: 'Poppins',
@@ -405,9 +444,9 @@ class _MainScreenState extends State<MainScreen> {
                               ),
                             ),
                             Text(
-                              "You have a healthy BMI",
-                              style: TextStyle(
-                                color: Color.fromRGBO(153, 153, 153, 1),
+                              bmiController.text,
+                              style: const TextStyle(
+                                color: const Color.fromRGBO(153, 153, 153, 1),
                                 fontWeight: FontWeight.w100,
                                 fontFamily: 'Poppins',
                                 fontSize: 12,
@@ -415,9 +454,7 @@ class _MainScreenState extends State<MainScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          width: 30,
-                        ),
+                        const Spacer(),
                         Image.asset(
                           'assets/plus.png',
                           height: 58,
