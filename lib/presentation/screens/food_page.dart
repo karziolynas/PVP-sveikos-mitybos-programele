@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:projecthealthapp/presentation/screens/diary_page.dart';
 import 'package:projecthealthapp/presentation/screens/main_page.dart';
 import 'package:projecthealthapp/presentation/screens/settings_screen.dart';
@@ -138,98 +139,281 @@ class _FoodPageState extends State<FoodPage> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 20.0),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Image.asset(
-                                              'assets/spaghetti.png',
-                                              height: 120,
-                                            ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Image.asset(
+                                                  'assets/spaghetti.png',
+                                                  height: 120,
+                                                ),
+                                              ),
+                                              const Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 5.0, top: 10),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Spaghetti Bolognese',
+                                                      style: TextStyle(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 16,
+                                                          color: Color.fromRGBO(
+                                                              9, 21, 21, 1)),
+                                                    ),
+                                                    Text(
+                                                      'Pasta',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'Poppins-n',
+                                                          fontSize: 14,
+                                                          color: Color.fromRGBO(
+                                                              102,
+                                                              102,
+                                                              102,
+                                                              1)),
+                                                    ),
+                                                    SizedBox(height: 15),
+                                                    Row(
+                                                      children: [
+                                                        ImageIcon(
+                                                          AssetImage(
+                                                              'assets/clock.png'),
+                                                        ),
+                                                        SizedBox(width: 7),
+                                                        Text(
+                                                          '30-45 minutes',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                'Poppins-n',
+                                                            fontSize: 13,
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    102,
+                                                                    102,
+                                                                    102,
+                                                                    1),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        ImageIcon(
+                                                          AssetImage(
+                                                            'assets/medal.png',
+                                                          ),
+                                                        ),
+                                                        SizedBox(width: 7),
+                                                        Text(
+                                                          'Medium',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                'Poppins-n',
+                                                            fontSize: 14,
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    102,
+                                                                    102,
+                                                                    102,
+                                                                    1),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(height: 10),
+                                                    Row(
+                                                      children: [
+                                                        ImageIcon(
+                                                          AssetImage(
+                                                              'assets/leaf.png'),
+                                                        ),
+                                                        SizedBox(width: 7),
+                                                        Text(
+                                                          'Vegan',
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            fontFamily:
+                                                                'Poppins-n',
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    102,
+                                                                    102,
+                                                                    102,
+                                                                    1),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(height: 10),
+                                                    Text(
+                                                      'This food is high in',
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontFamily: 'Poppins-n',
+                                                        color: Color.fromRGBO(
+                                                            102, 102, 102, 1),
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      'iron, iodine, vitamin B12',
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontFamily: 'Poppins-n',
+                                                        color: Color.fromRGBO(
+                                                            102, 102, 102, 1),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          const Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 5.0, top: 10),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Spaghetti Bolognese',
-                                                  style: TextStyle(
-                                                      fontFamily: 'Poppins',
-                                                      fontSize: 16,
-                                                      color: Color.fromRGBO(
-                                                          9, 21, 21, 1)),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Image.asset(
+                                                  'assets/spaghetti.png',
+                                                  height: 120,
                                                 ),
-                                                Text(
-                                                  'Pasta',
-                                                  style: TextStyle(
-                                                      fontFamily: 'Poppins-n',
-                                                      fontSize: 14,
-                                                      color: Color.fromRGBO(
-                                                          102, 102, 102, 1)),
-                                                ),
-                                                SizedBox(height: 15),
-                                                Row(
+                                              ),
+                                              const Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 10.0, top: 10),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
-                                                    ImageIcon(
-                                                      AssetImage(
-                                                          'assets/clock.png'),
-                                                    ),
-                                                    SizedBox(width: 7),
                                                     Text(
-                                                      '30-45 minutes',
+                                                      'Spaghetti Bolognese',
                                                       style: TextStyle(
-                                                        fontFamily: 'Poppins-n',
-                                                        fontSize: 13,
-                                                        color: Color.fromRGBO(
-                                                            102, 102, 102, 1),
-                                                      ),
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 16,
+                                                          color: Color.fromRGBO(
+                                                              9, 21, 21, 1)),
                                                     ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    ImageIcon(
-                                                      AssetImage(
-                                                        'assets/medal.png',
-                                                      ),
-                                                    ),
-                                                    SizedBox(width: 7),
                                                     Text(
-                                                      'Medium',
+                                                      'Pasta',
                                                       style: TextStyle(
-                                                        fontFamily: 'Poppins-n',
+                                                          fontFamily:
+                                                              'Poppins-n',
+                                                          fontSize: 14,
+                                                          color: Color.fromRGBO(
+                                                              102,
+                                                              102,
+                                                              102,
+                                                              1)),
+                                                    ),
+                                                    SizedBox(height: 15),
+                                                    Row(
+                                                      children: [
+                                                        ImageIcon(
+                                                          AssetImage(
+                                                              'assets/clock.png'),
+                                                        ),
+                                                        SizedBox(width: 7),
+                                                        Text(
+                                                          '30-45 minutes',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                'Poppins-n',
+                                                            fontSize: 13,
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    102,
+                                                                    102,
+                                                                    102,
+                                                                    1),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        ImageIcon(
+                                                          AssetImage(
+                                                            'assets/medal.png',
+                                                          ),
+                                                        ),
+                                                        SizedBox(width: 7),
+                                                        Text(
+                                                          'Medium',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                'Poppins-n',
+                                                            fontSize: 14,
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    102,
+                                                                    102,
+                                                                    102,
+                                                                    1),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(height: 10),
+                                                    Row(
+                                                      children: [
+                                                        ImageIcon(
+                                                          AssetImage(
+                                                              'assets/meat.png'),
+                                                        ),
+                                                        SizedBox(width: 7),
+                                                        Text(
+                                                          'Includes meat',
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            fontFamily:
+                                                                'Poppins-n',
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    102,
+                                                                    102,
+                                                                    102,
+                                                                    1),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(height: 10),
+                                                    Text(
+                                                      'This food is high in',
+                                                      style: TextStyle(
                                                         fontSize: 14,
+                                                        fontFamily: 'Poppins-n',
                                                         color: Color.fromRGBO(
                                                             102, 102, 102, 1),
                                                       ),
                                                     ),
-                                                  ],
-                                                ),
-                                                SizedBox(height: 10),
-                                                Row(
-                                                  children: [
-                                                    ImageIcon(
-                                                      AssetImage(
-                                                          'assets/leaf.png'),
-                                                    ),
-                                                    SizedBox(width: 7),
                                                     Text(
-                                                      'Vegan',
+                                                      'iron, iodine, vitamin B12',
                                                       style: TextStyle(
                                                         fontSize: 14,
                                                         fontFamily: 'Poppins-n',
@@ -239,191 +423,180 @@ class _FoodPageState extends State<FoodPage> {
                                                     ),
                                                   ],
                                                 ),
-                                                SizedBox(height: 10),
-                                                Text(
-                                                  'This food is high in',
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily: 'Poppins-n',
-                                                    color: Color.fromRGBO(
-                                                        102, 102, 102, 1),
-                                                  ),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Image.asset(
+                                                  'assets/spaghetti.png',
+                                                  height: 120,
                                                 ),
-                                                Text(
-                                                  'iron, iodine, vitamin B12',
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily: 'Poppins-n',
-                                                    color: Color.fromRGBO(
-                                                        102, 102, 102, 1),
-                                                  ),
+                                              ),
+                                              const Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 5.0, top: 10),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Spaghetti Bolognese',
+                                                      style: TextStyle(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 16,
+                                                          color: Color.fromRGBO(
+                                                              9, 21, 21, 1)),
+                                                    ),
+                                                    Text(
+                                                      'Pasta',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'Poppins-n',
+                                                          fontSize: 14,
+                                                          color: Color.fromRGBO(
+                                                              102,
+                                                              102,
+                                                              102,
+                                                              1)),
+                                                    ),
+                                                    SizedBox(height: 15),
+                                                    Row(
+                                                      children: [
+                                                        ImageIcon(
+                                                          AssetImage(
+                                                              'assets/clock.png'),
+                                                        ),
+                                                        SizedBox(width: 7),
+                                                        Text(
+                                                          '30-45 minutes',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                'Poppins-n',
+                                                            fontSize: 13,
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    102,
+                                                                    102,
+                                                                    102,
+                                                                    1),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        ImageIcon(
+                                                          AssetImage(
+                                                            'assets/medal.png',
+                                                          ),
+                                                        ),
+                                                        SizedBox(width: 7),
+                                                        Text(
+                                                          'Medium',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                'Poppins-n',
+                                                            fontSize: 14,
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    102,
+                                                                    102,
+                                                                    102,
+                                                                    1),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(height: 10),
+                                                    Row(
+                                                      children: [
+                                                        ImageIcon(
+                                                          AssetImage(
+                                                              'assets/leaf.png'),
+                                                        ),
+                                                        SizedBox(width: 7),
+                                                        Text(
+                                                          'Vegan',
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            fontFamily:
+                                                                'Poppins-n',
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    102,
+                                                                    102,
+                                                                    102,
+                                                                    1),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(height: 10),
+                                                    Text(
+                                                      'This food is high in',
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontFamily: 'Poppins-n',
+                                                        color: Color.fromRGBO(
+                                                            102, 102, 102, 1),
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      'iron, iodine, vitamin B12',
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontFamily: 'Poppins-n',
+                                                        color: Color.fromRGBO(
+                                                            102, 102, 102, 1),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
                                     ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Image.asset(
-                                              'assets/spaghetti.png',
-                                              height: 120,
-                                            ),
-                                          ),
-                                          const Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 10.0, top: 10),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Spaghetti Bolognese',
-                                                  style: TextStyle(
-                                                      fontFamily: 'Poppins',
-                                                      fontSize: 16,
-                                                      color: Color.fromRGBO(
-                                                          9, 21, 21, 1)),
-                                                ),
-                                                Text(
-                                                  'Pasta',
-                                                  style: TextStyle(
-                                                      fontFamily: 'Poppins-n',
-                                                      fontSize: 14,
-                                                      color: Color.fromRGBO(
-                                                          102, 102, 102, 1)),
-                                                ),
-                                                SizedBox(height: 15),
-                                                Row(
-                                                  children: [
-                                                    ImageIcon(
-                                                      AssetImage(
-                                                          'assets/clock.png'),
-                                                    ),
-                                                    SizedBox(width: 7),
-                                                    Text(
-                                                      '30-45 minutes',
-                                                      style: TextStyle(
-                                                        fontFamily: 'Poppins-n',
-                                                        fontSize: 13,
-                                                        color: Color.fromRGBO(
-                                                            102, 102, 102, 1),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    ImageIcon(
-                                                      AssetImage(
-                                                        'assets/medal.png',
-                                                      ),
-                                                    ),
-                                                    SizedBox(width: 7),
-                                                    Text(
-                                                      'Medium',
-                                                      style: TextStyle(
-                                                        fontFamily: 'Poppins-n',
-                                                        fontSize: 14,
-                                                        color: Color.fromRGBO(
-                                                            102, 102, 102, 1),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(height: 10),
-                                                Row(
-                                                  children: [
-                                                    ImageIcon(
-                                                      AssetImage(
-                                                          'assets/meat.png'),
-                                                    ),
-                                                    SizedBox(width: 7),
-                                                    Text(
-                                                      'Includes meat',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        fontFamily: 'Poppins-n',
-                                                        color: Color.fromRGBO(
-                                                            102, 102, 102, 1),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(height: 10),
-                                                Text(
-                                                  'This food is high in',
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily: 'Poppins-n',
-                                                    color: Color.fromRGBO(
-                                                        102, 102, 102, 1),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'iron, iodine, vitamin B12',
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily: 'Poppins-n',
-                                                    color: Color.fromRGBO(
-                                                        102, 102, 102, 1),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 30),
-                              Container(
-                                width: 500,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Ingredient suggestions',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Poppins-n',
-                                        fontSize: 19,
-                                        color: Color.fromRGBO(59, 59, 59, 1),
-                                      ),
+                              const Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Ingredient suggestions',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Poppins',
+                                      fontSize: 26,
+                                      color: Color.fromRGBO(135, 133, 162, 1),
                                     ),
-                                    SizedBox(
-                                        height:
-                                            5), // Spacer between the two text widgets
-                                    Text(
-                                      'If you consumed these ingredients click on them',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Poppins-n',
-                                        fontSize: 13,
-                                        color: Color.fromRGBO(153, 153, 153, 1),
-                                      ),
+                                  ),
+                                  SizedBox(
+                                      height:
+                                          5), // Spacer between the two text widgets
+                                  Text(
+                                    'If you consumed any of these ingredients click on them',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Poppins-n',
+                                      fontSize: 15,
+                                      color: Color.fromRGBO(135, 133, 162, 1),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 12),

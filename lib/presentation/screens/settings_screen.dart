@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:projecthealthapp/common/auth.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -164,7 +163,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 40),
+                        padding: const EdgeInsets.only(top: 35.0),
                         child: SizedBox(
                           width: 300,
                           child: ElevatedButton(
@@ -189,11 +188,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 ),
                               ),
                               child: const Text(
-                                'Edit profile',
+                                'Delete account',
                                 style: TextStyle(
                                   fontFamily: 'Poppins-n',
                                   fontSize: 19,
-                                  color: Color.fromRGBO(59, 59, 59, 1),
+                                  color: Color.fromRGBO(233, 68, 53, 1),
                                 ),
                               )),
                         ),
@@ -203,38 +202,47 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         width: 300,
                         child: ElevatedButton(
                             onPressed: () {
-                              print('a');
-                            },
-                            style: ButtonStyle(
-                              alignment: Alignment.centerLeft,
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.white,
-                              ),
-                              foregroundColor: MaterialStateProperty.all<Color>(
-                                const Color.fromRGBO(135, 133, 162, 1),
-                              ),
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                            ),
-                            child: const Text(
-                              'Delete account',
-                              style: TextStyle(
-                                fontFamily: 'Poppins-n',
-                                fontSize: 19,
-                                color: Color.fromRGBO(233, 68, 53, 1),
-                              ),
-                            )),
-                      ),
-                      const SizedBox(height: 15),
-                      SizedBox(
-                        width: 300,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              print('a');
+                              // Show the password change popup
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text('Change Password'),
+                                    content: const Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        TextField(
+                                          decoration: InputDecoration(
+                                              labelText: 'Old Password'),
+                                          obscureText: true,
+                                        ),
+                                        TextField(
+                                          decoration: InputDecoration(
+                                              labelText: 'New Password'),
+                                          obscureText: true,
+                                        ),
+                                      ],
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          // Handle cancel button press
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('Cancel'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          // Handle confirm button press
+                                          // Implement password change logic here
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('Change'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
                             },
                             style: ButtonStyle(
                               alignment: Alignment.centerLeft,
