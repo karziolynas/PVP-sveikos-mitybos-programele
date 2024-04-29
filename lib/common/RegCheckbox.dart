@@ -26,7 +26,7 @@ class _RegCheckboxState extends State<RegCheckbox> {
     }
 
     return Checkbox(
-      checkColor: Color.fromRGBO(135, 133, 162, 1),
+      checkColor: const Color.fromRGBO(135, 133, 162, 1),
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked,
       onChanged: (bool? value) {

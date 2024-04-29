@@ -8,6 +8,7 @@ import 'package:pedometer/pedometer.dart';
 import 'dart:async';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:projecthealthapp/common/databaseService.dart';
+import 'package:projecthealthapp/models/Edamam.dart';
 import 'package:projecthealthapp/presentation/screens/diary_page.dart';
 import 'package:projecthealthapp/presentation/screens/food_page.dart';
 import 'package:projecthealthapp/presentation/screens/settings_screen.dart';
@@ -27,12 +28,20 @@ class _MainScreenState extends State<MainScreen> {
   double _percnt = 0.0;
   final stepsController = TextEditingController();
   final bmiController = TextEditingController();
+  EdamamApiService api = EdamamApiService();
+  List<EdamamRecipeModel> recipes = [];
 
   @override
   void initState() {
     initPlatformState();
     getUserData();
+    _fetchRecipes(); // Fetch data asynchronously
     super.initState();
+  }
+
+  Future<void> _fetchRecipes() async {
+    recipes = await api.getRecipes('chicken', 'balanced'); // Await the future
+    setState(() {}); // Trigger a rebuild after fetching data
   }
 
   String userName = "";
