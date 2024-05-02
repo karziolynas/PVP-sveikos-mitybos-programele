@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:projecthealthapp/common/auth.dart';
-
 import 'package:pedometer/pedometer.dart';
 import 'dart:async';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -12,6 +10,8 @@ import 'package:projecthealthapp/models/Edamam.dart';
 import 'package:projecthealthapp/presentation/screens/diary_page.dart';
 import 'package:projecthealthapp/presentation/screens/food_page.dart';
 import 'package:projecthealthapp/presentation/screens/settings_screen.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -22,21 +22,69 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _count = 0;
+  DateTime currentDate =
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 
   late Stream<StepCount> _stepCountStream;
   int _steps = -1;
   double _percnt = 0.0;
   final stepsController = TextEditingController();
+  final weightController = TextEditingController();
   final bmiController = TextEditingController();
   EdamamApiService api = EdamamApiService();
   List<EdamamRecipeModel> recipes = [];
 
   @override
   void initState() {
+    getUserData();
+    getLocalData();
     initPlatformState();
     getUserData();
     super.initState();
   }
+
+
+
+  void getLocalData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final date = prefs.getString('date') ?? 0;
+    if (date != 0) {
+      DateTime dateT = DateTime.parse(date.toString());
+      if (dateT.difference(currentDate).inDays == 0) {
+        final cupCount = prefs.getInt('cupCount') ?? 0;
+        final stepCount = prefs.getInt('stepCount') ?? 0;
+        setState(() {
+          _count = cupCount;
+          _steps = stepCount;
+        });
+        DatabaseService()
+            .addDailyData(cupCount: cupCount, stepCount: stepCount);
+      }
+    }
+    else if (date == 0)
+    {
+      await prefs.setString('date', currentDate.toString());
+      await prefs.setInt('cupCount', 0);
+      await prefs.setInt('stepCount', 0);
+      setState(() {
+          _count = 0;
+          _steps = 0;
+        });
+        DatabaseService()
+            .addDailyData(cupCount: 0, stepCount: 0);
+    }
+  }
+
+  void saveCupCount(int count) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('cupCount', count);
+  }
+
+  void saveStepCount(int stepCount) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('stepCount', stepCount);
+  }
+
 
   String userName = "";
   int weight = 0;
@@ -44,17 +92,17 @@ class _MainScreenState extends State<MainScreen> {
   double bmi = 0;
   Map<String, dynamic>? userData;
 
-  void getUserData() async {
-    await FirebaseFirestore.instance
+  void getUserData() {
+    FirebaseFirestore.instance
         .collection("users")
         .where("userId", isEqualTo: DatabaseService().userId)
         .get()
         .then((QuerySnapshot snap) => {
               userData = snap.docs.first.data()! as Map<String, dynamic>,
-              userName = userData!['name'],
-              weight = jsonDecode(userData!['weight']),
-              height = jsonDecode(userData!['height']) / 100,
-              bmi = (weight / (height * height)),
+              setState(() => userName = userData!['name']),
+              setState(() => weight = jsonDecode(userData!['weight'])),
+              setState(() => height = jsonDecode(userData!['height']) / 100),
+              setState(() => bmi = (weight / (height * height))),
               if (bmi <= 18.5)
                 {bmiController.text = "Your BMI is too low!"}
               else if (bmi > 18.5 && bmi < 24.9)
@@ -79,7 +127,7 @@ class _MainScreenState extends State<MainScreen> {
     print('onStepCountError: $error');
     setState(() {
       _steps = -2;
-      stepsController.text = "ERR";
+      stepsController.text = "0";
     });
   }
 
@@ -297,7 +345,13 @@ class _MainScreenState extends State<MainScreen> {
                                     iconSize: 20,
                                     onPressed: () => {
                                       if (_count >= 1)
-                                        {setState(() => _count--)}
+                                        {
+                                          setState(() {
+                                            _count--;
+                                            saveCupCount(_count);
+                                            saveStepCount(_steps);
+                                          })
+                                        }
                                     },
                                   ),
                                   const SizedBox(
@@ -318,8 +372,14 @@ class _MainScreenState extends State<MainScreen> {
                                       AssetImage('assets/plus.png'),
                                     ),
                                     iconSize: 23,
-                                    onPressed: () => setState(() => _count++),
-                                  ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _count++;
+                                        saveCupCount(_count);
+                                        saveStepCount(_steps);
+                                      });
+                                    },
+                                  )
                                 ],
                               ),
                               Column(
@@ -453,11 +513,54 @@ class _MainScreenState extends State<MainScreen> {
                           ],
                         ),
                         const Spacer(),
-                        Image.asset(
-                          'assets/plus.png',
-                          height: 58,
-                          width: 78,
-                        ),
+                        IconButton(
+                          onPressed: () {
+                            // Show the weight change popup
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text(
+                                      'Please input your new weight'),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      TextFormField(
+                                        keyboardType: TextInputType.number,
+                                        controller: weightController,
+                                        decoration: InputDecoration(
+                                            labelText: 'New weight'),
+                                      ),
+                                    ],
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        // Handle cancel button press
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        // Handle confirm button press
+                                        DatabaseService().updateWeight(
+                                            weight: weightController.text);
+                                        setState(() => weight =
+                                            int.parse(weightController.text));
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('Change'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          color: const Color.fromRGBO(255, 199, 199, 1),
+                          icon: const ImageIcon(AssetImage('assets/plus.png')),
+                          iconSize: 45,
+                        )
                       ]),
                     ),
                     const SizedBox(
