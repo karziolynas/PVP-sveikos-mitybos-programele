@@ -40,14 +40,10 @@ class _MainScreenState extends State<MainScreen> {
     getLocalData();
     initPlatformState();
     getUserData();
-    _fetchRecipes(); // Fetch data asynchronously
     super.initState();
   }
 
-  Future<void> _fetchRecipes() async {
-    recipes = await api.getRecipes('chicken', 'balanced'); // Await the future
-    setState(() {}); // Trigger a rebuild after fetching data
-  }
+
 
   void getLocalData() async {
     final prefs = await SharedPreferences.getInstance();
@@ -88,6 +84,7 @@ class _MainScreenState extends State<MainScreen> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('stepCount', stepCount);
   }
+
 
   String userName = "";
   int weight = 0;
