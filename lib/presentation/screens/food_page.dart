@@ -22,6 +22,7 @@ class _FoodPageState extends State<FoodPage> {
   @override
   void initState() {
     _fetchRecipes(); // Fetch data asynchronously
+    loadlist();
     super.initState();
   }
 
@@ -31,12 +32,6 @@ class _FoodPageState extends State<FoodPage> {
   }
 
   List<String> selectedIngredients = [];
-
-  @override
-  void initState() {
-    loadlist();
-    super.initState();
-  }
 
   void test() async {
     final prefs = await SharedPreferences.getInstance();
