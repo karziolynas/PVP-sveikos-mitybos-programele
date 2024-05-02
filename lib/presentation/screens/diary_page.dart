@@ -3,6 +3,8 @@ import 'package:projecthealthapp/presentation/screens/food_page.dart';
 import 'package:projecthealthapp/presentation/screens/main_page.dart';
 import 'package:projecthealthapp/presentation/screens/settings_screen.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class DiaryPage extends StatefulWidget {
   const DiaryPage({super.key});
 
@@ -11,6 +13,19 @@ class DiaryPage extends StatefulWidget {
 }
 
 class _DiaryPageState extends State<DiaryPage> {
+  List<String> selectedIngredients = [];
+  void loadlist() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() =>
+        selectedIngredients = prefs.getStringList('selectedIngredients')!);
+  }
+
+  @override
+  void initState() {
+    loadlist();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -244,15 +259,20 @@ class _DiaryPageState extends State<DiaryPage> {
                                   height: 50,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(11),
-                                    color:
-                                        const Color.fromRGBO(255, 199, 199, 1),
+                                    color: selectedIngredients.contains('Nuts')
+                                        ? const Color.fromRGBO(255, 199, 199, 1)
+                                        : Colors.white,
                                   ),
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(left: 15.0),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
                                     child: Text(
                                       'Nuts',
                                       style: TextStyle(
-                                          color: Colors.white,
+                                          color: selectedIngredients
+                                                  .contains('Nuts')
+                                              ? Colors.white
+                                              : const Color.fromRGBO(
+                                                  135, 133, 162, 1),
                                           fontFamily: 'Poppins',
                                           fontSize: 20),
                                     ),
@@ -267,14 +287,20 @@ class _DiaryPageState extends State<DiaryPage> {
                                   height: 50,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(11),
+                                    color: selectedIngredients.contains('Milk')
+                                        ? const Color.fromRGBO(255, 199, 199, 1)
+                                        : Colors.white,
                                   ),
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(left: 15.0),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
                                     child: Text(
                                       'Milk',
                                       style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(135, 133, 162, 1),
+                                          color: selectedIngredients
+                                                  .contains('Milk')
+                                              ? Colors.white
+                                              : const Color.fromRGBO(
+                                                  135, 133, 162, 1),
                                           fontFamily: 'Poppins',
                                           fontSize: 20),
                                     ),
@@ -289,14 +315,20 @@ class _DiaryPageState extends State<DiaryPage> {
                                   height: 50,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(11),
+                                    color: selectedIngredients.contains('Chicken')
+                                        ? const Color.fromRGBO(255, 199, 199, 1)
+                                        : Colors.white,
                                   ),
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(left: 15.0),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
                                     child: Text(
                                       'Chicken',
                                       style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(135, 133, 162, 1),
+                                          color: selectedIngredients
+                                                  .contains('Chicken')
+                                              ? Colors.white
+                                              : const Color.fromRGBO(
+                                                  135, 133, 162, 1),
                                           fontFamily: 'Poppins',
                                           fontSize: 20),
                                     ),

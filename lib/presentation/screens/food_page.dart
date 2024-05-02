@@ -4,6 +4,8 @@ import 'package:projecthealthapp/presentation/screens/diary_page.dart';
 import 'package:projecthealthapp/presentation/screens/main_page.dart';
 import 'package:projecthealthapp/presentation/screens/settings_screen.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class FoodPage extends StatefulWidget {
   const FoodPage({Key? key}) : super(key: key);
 
@@ -13,6 +15,23 @@ class FoodPage extends StatefulWidget {
 
 class _FoodPageState extends State<FoodPage> {
   List<String> selectedIngredients = [];
+
+  @override
+  void initState() {
+    loadlist();
+    super.initState();
+  }
+
+  void test() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setStringList('selectedIngredients', selectedIngredients);
+  }
+
+  void loadlist() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() =>  selectedIngredients= prefs.getStringList('selectedIngredients')!);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -609,8 +628,10 @@ class _FoodPageState extends State<FoodPage> {
                                         if (selectedIngredients
                                             .contains('Nuts')) {
                                           selectedIngredients.remove('Nuts');
+                                          test();
                                         } else {
                                           selectedIngredients.add('Nuts');
+                                          test();
                                         }
                                       });
                                     },
@@ -658,8 +679,10 @@ class _FoodPageState extends State<FoodPage> {
                                         if (selectedIngredients
                                             .contains('Milk')) {
                                           selectedIngredients.remove('Milk');
+                                          test();
                                         } else {
                                           selectedIngredients.add('Milk');
+                                          test();
                                         }
                                       });
                                     },
@@ -707,8 +730,10 @@ class _FoodPageState extends State<FoodPage> {
                                         if (selectedIngredients
                                             .contains('Chicken')) {
                                           selectedIngredients.remove('Chicken');
+                                          test();
                                         } else {
                                           selectedIngredients.add('Chicken');
+                                          test();
                                         }
                                       });
                                     },

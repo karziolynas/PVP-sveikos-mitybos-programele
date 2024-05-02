@@ -146,7 +146,7 @@ class DatabaseService {
           .collection('daily')
           .where('userId', isEqualTo: userId)
           .where('date', isLessThanOrEqualTo: currentDate)
-          .where('date', isGreaterThanOrEqualTo: DateTime.now().subtract(Duration(days:1)))
+          .where('date', isGreaterThanOrEqualTo: DateTime.now().subtract(Duration(hours:DateTime.now().hour)))
           .get();
 
       if (querySnapshot.docs.isNotEmpty) {
@@ -162,6 +162,35 @@ class DatabaseService {
           'date': currentDate,
           'waterIntake': cupCount,
           'stepCount': stepCount,
+        });
+      }
+    } catch (e) {
+      print("Error adding daily data: $e");
+    }
+  }
+
+  Future<void> addDailyDataFoodIngredients(
+      {required List<String> ingredients}) async {
+    DateTime currentDate = DateTime.now();
+    try {
+      QuerySnapshot querySnapshot = await _db
+          .collection('daily')
+          .where('userId', isEqualTo: userId)
+          .where('date', isLessThanOrEqualTo: currentDate)
+          .where('date', isGreaterThanOrEqualTo: DateTime.now().subtract(Duration(hours:DateTime.now().hour)))
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        String documentId = querySnapshot.docs.first.id;
+
+        await _db.collection('daily').doc(documentId).update({
+          'dailyIngredients': ingredients,
+        });
+      } else {
+        await _db.collection('daily').add({
+          'userId': userId,
+          'date': currentDate,
+          'dailyIngredients': ingredients,
         });
       }
     } catch (e) {
