@@ -35,13 +35,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     initPlatformState();
     getUserData();
-    _fetchRecipes(); // Fetch data asynchronously
     super.initState();
-  }
-
-  Future<void> _fetchRecipes() async {
-    recipes = await api.getRecipes('chicken', 'balanced'); // Await the future
-    setState(() {}); // Trigger a rebuild after fetching data
   }
 
   String userName = "";
